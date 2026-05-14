@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # portfolio
 
 A new Flutter project.
@@ -15,3 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# usman_portfolio
+This portfolio app is built using Flutter and showcases my skills, projects, and experience in mobile app development. The app features a modern UI, smooth navigation, responsive design, and clean architecture. It highlights my Flutter journey with project details, technologies used, and contact information professionally.
+>>>>>>> 3cbc8e65f9afe9db5148ab0eb0de85bc2c98fe35
