@@ -54,7 +54,7 @@ class ProjectsSection extends StatelessWidget {
           // Other projects grid
           Text('More Projects',
               style: AppStyles.headingMedium.copyWith(fontSize: 20))
-              .animate(duration: 500.ms).fadeIn(),
+              .animate().fadeIn(duration: 500.ms),
           const SizedBox(height: 20),
 
           if (isMobile)

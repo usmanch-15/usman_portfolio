@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../core/constants/app_colors.dart';
-import '../core/constants/app_styles.dart';
-import 'home_page.dart';
-
+import 'package:usman_portfolio/core/constants/app_colors.dart';
+import 'package:usman_portfolio/core/constants/app_styles.dart';
+import 'package:usman_portfolio/features/home_page.dart';
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
 
