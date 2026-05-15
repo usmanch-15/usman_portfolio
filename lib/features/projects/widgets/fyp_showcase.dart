@@ -37,7 +37,7 @@ class _FypShowcaseState extends State<FypShowcase> {
           boxShadow: _hovered
               ? [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.12),
+              color: const Color(0xFFe53935).withOpacity(0.12),
               blurRadius: 40,
               offset: const Offset(0, 20),
             )
@@ -47,19 +47,20 @@ class _FypShowcaseState extends State<FypShowcase> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Icon section
+            // Icon section — red gradient for Blood Bank
             Container(
-              width: 80, height: 80,
+              width: 80,
+              height: 80,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Color(0xFF4facfe), Color(0xFF00f2fe)],
+                  colors: [Color(0xFFe53935), Color(0xFFff6f60)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Center(
-                child: Icon(Icons.description_outlined,
+                child: Icon(Icons.bloodtype_rounded,
                     size: 40, color: Colors.white),
               ),
             ),
@@ -70,6 +71,7 @@ class _FypShowcaseState extends State<FypShowcase> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Badges
                   Row(
                     children: [
                       Container(
@@ -88,15 +90,15 @@ class _FypShowcaseState extends State<FypShowcase> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF4facfe).withOpacity(0.1),
+                          color: const Color(0xFFe53935).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(6),
                           border: Border.all(
-                              color: const Color(0xFF4facfe).withOpacity(0.3)),
+                              color: const Color(0xFFe53935).withOpacity(0.4)),
                         ),
-                        child: const Text('AI Powered',
+                        child: const Text('Life Saving App',
                             style: TextStyle(
                               fontSize: 11,
-                              color: Color(0xFF4facfe),
+                              color: Color(0xFFe53935),
                               fontFamily: 'Satoshi',
                               fontWeight: FontWeight.w600,
                             )),
@@ -121,15 +123,17 @@ class _FypShowcaseState extends State<FypShowcase> {
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _Feature('Resume parsing with AI'),
-                      _Feature('Job description matching'),
-                      _Feature('Actionable score & feedback'),
-                      _Feature('Flutter + Python FastAPI backend'),
+                      _Feature('Donor registration & blood group management'),
+                      _Feature('Nearby donors & blood banks via Google Maps'),
+                      _Feature('Emergency blood request & real-time alerts'),
+                      _Feature('Blood inventory tracking with Firebase'),
+                      _Feature('Flutter + Firebase + Google Maps API'),
                     ],
                   ),
 
                   const SizedBox(height: 24),
 
+                  // Tech chips
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -144,8 +148,8 @@ class _FypShowcaseState extends State<FypShowcase> {
                           color: AppColors.bgGlass,
                         ),
                         child: Text(t,
-                            style:
-                            AppStyles.bodyMedium.copyWith(fontSize: 12)),
+                            style: AppStyles.bodyMedium
+                                .copyWith(fontSize: 12)),
                       ),
                     )
                         .toList(),
@@ -153,10 +157,10 @@ class _FypShowcaseState extends State<FypShowcase> {
 
                   const SizedBox(height: 24),
 
+                  // GitHub button
                   if (p.githubUrl != null)
                     GestureDetector(
-                      onTap: () =>
-                          UrlLauncherHelper.openUrl(p.githubUrl!),
+                      onTap: () => UrlLauncherHelper.openUrl(p.githubUrl!),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
@@ -205,9 +209,12 @@ class _Feature extends StatelessWidget {
       child: Row(
         children: [
           const Icon(Icons.check_circle_outline_rounded,
-              size: 16, color: AppColors.primary),
+              size: 16, color: Color(0xFFe53935)),
           const SizedBox(width: 8),
-          Text(text, style: AppStyles.bodyMedium.copyWith(fontSize: 14)),
+          Expanded(
+            child: Text(text,
+                style: AppStyles.bodyMedium.copyWith(fontSize: 14)),
+          ),
         ],
       ),
     );

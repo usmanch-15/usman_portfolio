@@ -7,11 +7,11 @@ class AppStrings {
   static const String role3    = 'AI App Builder';
   static const String tagline  = 'Crafting digital experiences that live in the real world.';
   static const String bio      =
-      "I'm a creative Flutter developer from Pakistan who builds apps people actually use. "
-      "From cargo logistics running live in 4 African countries, to AI-powered accessibility tools "
-      "for the visually impaired — I turn complex problems into clean, beautiful solutions.";
+      "Flutter developer from Pakistan. "
+      "I've shipped cargo logistics across 4 African countries and built AI tools "
+      "for the visually impaired. Clean code, real impact — that's the standard I work to.";
 
-  static const String email    = 'usmanchaudhry592@gmail.com';
+  static const String email    = 'usman4009797@gmail.com';
   static const String github   = 'https://github.com/usmanch-15';
   static const String upwork   = 'https://www.upwork.com/freelancers/~010e8c29f24c9207c6';
   static const String linkedin = 'https://linkedin.com/in/muhammad-usman-dev';

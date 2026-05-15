@@ -9,8 +9,80 @@ class HeroVisual extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        // Code card
+      children: {
+
+        // ── Profile Picture ──────────────────────────────────────────────
+        Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Glow ring behind pic
+              Container(
+                width: 160,
+                height: 160,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: AppColors.primaryGrad,
+                ),
+              ),
+
+              // White ring
+              Container(
+                width: 154,
+                height: 154,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFF111118),
+                ),
+              ),
+
+              // Profile pic
+              ClipOval(
+                child: Image.asset(
+                  'assets/images/profile.jpg',
+                  width: 148,
+                  height: 148,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => Container(
+                    width: 148,
+                    height: 148,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF1A1A2E),
+                    ),
+                    child: const Icon(
+                      Icons.person_rounded,
+                      size: 70,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ),
+              ),
+
+              // Online green dot
+              Positioned(
+                bottom: 8,
+                right: 8,
+                child: Container(
+                  width: 18,
+                  height: 18,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF22C55E),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: const Color(0xFF111118), width: 3),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+            .animate(delay: 200.ms)
+            .fadeIn(duration: 600.ms)
+            .slideY(begin: -0.1, end: 0),
+
+        const SizedBox(height: 24),
+
+        // ── Code Card ────────────────────────────────────────────────────
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -106,7 +178,7 @@ class HeroVisual extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // Tech stack row
+        // ── Tech Stack Chips ─────────────────────────────────────────────
         Wrap(
           spacing: 10,
           runSpacing: 10,
@@ -114,12 +186,13 @@ class HeroVisual extends StatelessWidget {
               .map((t) => _techChip(t))
               .toList(),
         ).animate(delay: 500.ms).fadeIn(duration: 600.ms),
-      ],
+      },
     );
   }
 
   Widget _dot(Color color) => Container(
-    width: 13, height: 13,
+    width: 13,
+    height: 13,
     decoration: BoxDecoration(color: color, shape: BoxShape.circle),
   );
 
@@ -138,7 +211,8 @@ class HeroVisual extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(label, style: AppStyles.bodyMedium.copyWith(fontSize: 11),
+            Text(label,
+                style: AppStyles.bodyMedium.copyWith(fontSize: 11),
                 textAlign: TextAlign.center),
           ],
         ),
@@ -146,7 +220,8 @@ class HeroVisual extends StatelessWidget {
     );
   }
 
-  Widget _divider() => Container(width: 1, height: 56, color: AppColors.border);
+  Widget _divider() =>
+      Container(width: 1, height: 56, color: AppColors.border);
 
   Widget _techChip(String label) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -159,13 +234,20 @@ class HeroVisual extends StatelessWidget {
   );
 
   // Code text helpers
-  TextSpan _kw(String t) => TextSpan(text: t, style: const TextStyle(color: Color(0xFFC678DD)));
-  TextSpan _cl(String t) => TextSpan(text: t, style: const TextStyle(color: Color(0xFFE06C75)));
-  TextSpan _fn(String t) => TextSpan(text: t, style: const TextStyle(color: Color(0xFF61AFEF)));
-  TextSpan _str(String t) => TextSpan(text: t, style: const TextStyle(color: Color(0xFF98C379)));
-  TextSpan _num(String t) => TextSpan(text: t, style: const TextStyle(color: Color(0xFFD19A66)));
-  TextSpan _prop(String t) => TextSpan(text: t, style: const TextStyle(color: Color(0xFFABB2BF)));
-  TextSpan _t(String t) => TextSpan(text: t, style: const TextStyle(color: AppColors.textSecondary));
+  TextSpan _kw(String t) =>
+      TextSpan(text: t, style: const TextStyle(color: Color(0xFFC678DD)));
+  TextSpan _cl(String t) =>
+      TextSpan(text: t, style: const TextStyle(color: Color(0xFFE06C75)));
+  TextSpan _fn(String t) =>
+      TextSpan(text: t, style: const TextStyle(color: Color(0xFF61AFEF)));
+  TextSpan _str(String t) =>
+      TextSpan(text: t, style: const TextStyle(color: Color(0xFF98C379)));
+  TextSpan _num(String t) =>
+      TextSpan(text: t, style: const TextStyle(color: Color(0xFFD19A66)));
+  TextSpan _prop(String t) =>
+      TextSpan(text: t, style: const TextStyle(color: Color(0xFFABB2BF)));
+  TextSpan _t(String t) =>
+      TextSpan(text: t, style: const TextStyle(color: AppColors.textSecondary));
   TextSpan _sp(String t) => TextSpan(text: t);
   TextSpan _nl() => const TextSpan(text: '\n');
 }

@@ -21,7 +21,7 @@ class PortfolioData {
     SkillModel(category: 'AI & Backend', name: 'Gemini AI', level: 78),
     SkillModel(category: 'AI & Backend', name: 'Python', level: 72),
     SkillModel(category: 'AI & Backend', name: 'Node.js', level: 68),
-    SkillModel(category: 'AI & Backend', name: 'Supabase', level: 74),
+    SkillModel(category: 'AI & Backend', name: 'Firebase', level: 74),
 
     SkillModel(category: 'Tools', name: 'Git & GitHub', level: 90),
     SkillModel(category: 'Tools', name: 'VS Code', level: 95),
@@ -51,15 +51,16 @@ class PortfolioData {
           '5-star rating with consistent on-time delivery.',
       technologies: ['Flutter', 'Firebase', 'GetX', 'Stripe', 'OpenAI'],
     ),
+    // ✅ FIXED: Blood Bank as FYP
     ExperienceModel(
       role: 'Final Year Project Lead',
-      company: 'University – AI Resume Analyzer',
-      duration: '2023 – 2024',
+      company: 'University – Blood Bank Connect',
+      duration: 'Feb 2026 – Jan 2027',
       description:
-      'Led a team to build an AI-powered resume analyzer using Flutter + OpenAI. '
-          'The app parses resumes, matches them against job descriptions, and gives '
-          'actionable improvement feedback.',
-      technologies: ['Flutter', 'Python', 'OpenAI API', 'FastAPI', 'Figma'],
+      'Led a team to build a real-time blood donation platform using Flutter + Firebase. '
+          'The app connects blood seekers with nearby donors using location services, '
+          'emergency alerts, blood type filtering, and real-time inventory tracking.',
+      technologies: ['Flutter', 'Firebase', 'Google Maps', 'Push Notifications', 'Figma'],
     ),
     ExperienceModel(
       role: 'UI/UX Designer & Developer',
@@ -113,10 +114,11 @@ class PortfolioData {
       iconName: 'visibility',
       gradientColors: ['#f093fb', '#f5576c'],
     ),
+    // ✅ FIXED: isFyp: true added here
     ProjectModel(
       id: 'bloodbank',
       title: 'Blood Bank Connect',
-      subtitle: 'Emergency Blood Donation',
+      subtitle: 'FYP – Emergency Blood Donation',
       description:
       'A real-time blood donor finder connecting patients with donors in emergencies.',
       longDescription:
@@ -125,6 +127,7 @@ class PortfolioData {
           'and donation history.',
       technologies: ['Flutter', 'Firebase', 'Google Maps', 'Push Notifications'],
       githubUrl: 'https://github.com/usmanch-15/bloodbank',
+      isFyp: true,       // ✅ FYP flag
       isFeatured: true,
       category: 'Healthcare',
       status: 'Completed',
@@ -147,20 +150,21 @@ class PortfolioData {
       iconName: 'fitness_center',
       gradientColors: ['#43e97b', '#38f9d7'],
     ),
+    // ✅ FIXED: isFyp removed from AI Resume
     ProjectModel(
       id: 'airesume',
       title: 'AI Resume Analyzer',
-      subtitle: 'FYP – Smart Career Tool',
+      subtitle: 'Smart Career Tool',
       description:
       'An AI-powered resume analyzer that scores resumes against job descriptions using OpenAI.',
       longDescription:
-      'Final Year Project — parses uploaded resumes, compares them with job descriptions '
+      'Parses uploaded resumes, compares them with job descriptions '
           'using OpenAI GPT, and provides a detailed score with improvement suggestions. '
           'Flutter frontend + Python FastAPI backend.',
       technologies: ['Flutter', 'Python', 'FastAPI', 'OpenAI GPT', 'Supabase'],
       githubUrl: 'https://github.com/usmanch-15/ai-resume-analyzer',
       isFeatured: true,
-      isFyp: true,
+      // isFyp removed ✅
       category: 'AI / Career',
       status: 'Completed',
       iconName: 'description',
