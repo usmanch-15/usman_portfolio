@@ -43,24 +43,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
-    - assets/icons/
-    - assets/cv/Muhammad_Usman_CV.pdf
-
-  fonts:
-    - family: ClashDisplay
-      fonts:
-        - asset: assets/fonts/ClashDisplay-Regular.ttf
-        - asset: assets/fonts/ClashDisplay-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/ClashDisplay-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/ClashDisplay-Bold.ttf
-          weight: 700
-    - family: Satoshi
-      fonts:
-        - asset: assets/fonts/Satoshi-Regular.ttf
-        - asset: assets/fonts/Satoshi-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Satoshi-Bold.ttf
-          weight: 700
+    - assets/cv/usman_cv.pdf
