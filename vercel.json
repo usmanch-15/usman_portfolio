@@ -1,9 +1,3 @@
 {
-  "version": 2,
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/build/web/$1"
-    }
-  ]
+  "outputDirectory": "build/web"
 }
