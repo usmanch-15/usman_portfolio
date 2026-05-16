@@ -4,6 +4,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/constants/app_styles.dart';
 import '../../../core/utils/responsive_helper.dart';
+import '../../../core/utils/scroll_controller.dart';
 import '../../../core/utils/url_launcher_helper.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/typing_animation.dart';
@@ -105,7 +106,7 @@ class HeroText extends StatelessWidget {
             CustomButton(
               label: 'View My Work',
               icon: Icons.arrow_downward_rounded,
-              onTap: () {},
+              onTap: () => PortfolioScrollController.scrollToSection(4),
             ),
             CustomButton(
               label: 'Download CV',

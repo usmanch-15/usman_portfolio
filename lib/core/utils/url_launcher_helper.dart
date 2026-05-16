@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UrlLauncherHelper {
@@ -9,8 +8,20 @@ class UrlLauncherHelper {
     }
   }
 
-  static Future<void> sendEmail(String email,
-      {String? subject, String? body}) async {
+  static Future<void> downloadCv() async {
+    const url = 'assets/cv/usman_cv.pdf';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
+  // ✅ Naya method add kiya
+  static Future<void> sendEmail(
+      String email, {
+        String? subject,
+        String? body,
+      }) async {
     final uri = Uri(
       scheme: 'mailto',
       path: email,
@@ -21,14 +32,6 @@ class UrlLauncherHelper {
     );
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
-    }
-  }
-
-  static Future<void> downloadCv() async {
-    if (kIsWeb) {
-      await openUrl('assets/cv/usman_cv.pdf');
-    } else {
-      await openUrl('assets/cv/usman_cv.pdf');
     }
   }
 }
