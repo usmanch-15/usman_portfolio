@@ -9,7 +9,7 @@ class AppStrings {
   static const String bio      =
       "Flutter developer from Pakistan. "
       "I've shipped cargo logistics across 4 African countries and built AI tools "
-      "for the visually impaired. Clean code, real impact — that's the standard I work to.";
+      "for the visually impaired. Clean code, real impact  that's the standard I work to.";
 
   static const String email    = 'usman4009797@gmail.com';
   static const String github   = 'https://github.com/usmanch-15';
@@ -17,8 +17,8 @@ class AppStrings {
   static const String linkedin = 'https://linkedin.com/in/muhammad-usman-dev';
   static const String location = 'Pakistan 🇵🇰';
 
-  static const String cvAssetPath = 'assets/cv/Muhammad_Usman_CV.pdf';
-  static const String cvFileName  = 'Muhammad_Usman_CV.pdf';
+  static const String cvAssetPath = 'assets/cv/usman_cv.pdf';
+  static const String cvFileName  = 'usman_cv.pdf';
 
   // Nav
   static const List<String> navItems = [

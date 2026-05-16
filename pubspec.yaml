@@ -42,6 +42,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # ✅ Assets added
   assets:
-    - assets/images/profile.jpg
+    - assets/images/profile.png
+    - assets/cv/usman_cv.pdf

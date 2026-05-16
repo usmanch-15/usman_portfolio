@@ -26,9 +26,9 @@ class UrlLauncherHelper {
 
   static Future<void> downloadCv() async {
     if (kIsWeb) {
-      await openUrl('assets/cv/Muhammad_Usman_CV.pdf');
+      await openUrl('assets/cv/usman_cv.pdf');
     } else {
-      await openUrl('assets/cv/Muhammad_Usman_CV.pdf');
+      await openUrl('assets/cv/usman_cv.pdf');
     }
   }
 }

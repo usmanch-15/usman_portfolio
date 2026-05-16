@@ -9,7 +9,7 @@ class HeroVisual extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: {
+      children: [
 
         // ── Profile Picture ──────────────────────────────────────────────
         Center(
@@ -39,7 +39,7 @@ class HeroVisual extends StatelessWidget {
               // Profile pic
               ClipOval(
                 child: Image.asset(
-                  'assets/images/profile.jpg',
+                  'assets/images/profile.png',
                   width: 148,
                   height: 148,
                   fit: BoxFit.cover,
@@ -186,7 +186,7 @@ class HeroVisual extends StatelessWidget {
               .map((t) => _techChip(t))
               .toList(),
         ).animate(delay: 500.ms).fadeIn(duration: 600.ms),
-      },
+      ],
     );
   }
 

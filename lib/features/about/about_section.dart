@@ -52,7 +52,7 @@ class AboutSection extends StatelessWidget {
 
         Text(
           'I believe great apps solve real problems. Whether it\'s cargo logistics '
-              'across Africa or AI tools for accessibility — I care deeply about the '
+              'across Africa or AI tools for accessibility I care deeply about the '
               'impact my code makes in the world.',
           style: AppStyles.bodyMedium,
         ).animate(delay: 200.ms).fadeIn(duration: 600.ms),
