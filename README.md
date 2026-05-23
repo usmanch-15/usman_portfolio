@@ -1,22 +1,58 @@
-<<<<<<< HEAD
-# portfolio
+# 🚀 Usman Portfolio (Flutter)
 
-A new Flutter project.
+A modern, responsive, and animated **Flutter Developer Portfolio App** built to showcase my skills, projects, and experience in mobile app development.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ About Project
 
-A few resources to get you started if this is your first Flutter project:
+This portfolio app is built using **Flutter** and demonstrates:
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- Modern UI/UX design
+- Smooth animations
+- Responsive layout (Web + Mobile)
+- Clean architecture
+- Professional project showcase
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# usman_portfolio
-This portfolio app is built using Flutter and showcases my skills, projects, and experience in mobile app development. The app features a modern UI, smooth navigation, responsive design, and clean architecture. It highlights my Flutter journey with project details, technologies used, and contact information professionally.
->>>>>>> 3cbc8e65f9afe9db5148ab0eb0de85bc2c98fe35
+It highlights my journey as a Flutter Developer with real projects, skills, and contact information.
+
+---
+
+## 🛠️ Tech Stack
+
+- Flutter
+- Dart
+- GoRouter (Navigation)
+- Google Fonts
+- Flutter Animate
+- Lottie Animations
+- Font Awesome Icons
+- URL Launcher
+
+---
+
+## 📱 Features
+
+- 🎯 Hero section with animated intro
+- 💼 Projects showcase section
+- 🧠 Skills display
+- 📞 Contact form section
+- 🌐 Fully responsive (mobile + web)
+- ⚡ Smooth page transitions
+- 🎨 Modern glassmorphism UI
+
+---
+
+## 🌐 Live Demo
+
+👉 https://usman-portfolio-lake-five.vercel.app
+
+---
+
+## 📸 Screenshots
+
+> Add screenshots here for better presentation
+
+---
+
+## 📂 Folder Structure (Overview)
