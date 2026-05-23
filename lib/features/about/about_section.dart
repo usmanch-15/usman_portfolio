@@ -1,162 +1,207 @@
+// lib/screens/sections/about_section.dart
+
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_strings.dart';
-import '../../core/constants/app_styles.dart';
-import '../../core/utils/responsive_helper.dart';
-import '../../core/widgets/section_title.dart';
+
+import 'package:google_fonts/google_fonts.dart';
+import '../../core/theme/app_theme.dart';
+import '../../core/utils/responsive.dart';
+import '../../core/widgets/common_widgets.dart';
+import '../../data/portfolio_data.dart';
+
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveHelper.isMobile(context);
-    final padding = ResponsiveHelper.sectionPadding(context);
+    final isMobile = Responsive.isMobile(context);
 
-    return Container(
-      padding: padding,
-      child: isMobile
-          ? Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_left(), const SizedBox(height: 48), _right()],
-      )
-          : Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SectionWrapper(
+      child: Column(
         children: [
-          Expanded(flex: 5, child: _left()),
-          const SizedBox(width: 80),
-          Expanded(flex: 4, child: _right()),
+          FadeInUp(
+            child: const SectionHeader(
+              badge: '✦  About Me',
+              title: 'Passionate Mobile Developer',
+              subtitle: 'From Pakistan to the world — building apps that matter',
+            ),
+          ),
+          SizedBox(height: isMobile ? 40 : 60),
+
+          isMobile
+              ? _buildMobileLayout(context)
+              : _buildDesktopLayout(context),
         ],
       ),
     );
   }
 
-  Widget _left() {
-    return Column(
+  Widget _buildDesktopLayout(BuildContext context) {
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SectionTitle(
-          label: 'About Me',
-          title: 'Building apps that\nlive in the real world',
-          subtitle: null,
-        ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.3, end: 0),
-
-        const SizedBox(height: 32),
-
-        Text(AppStrings.bio, style: AppStyles.bodyLarge)
-            .animate(delay: 100.ms)
-            .fadeIn(duration: 600.ms),
-
-        const SizedBox(height: 16),
-
-        Text(
-          'I believe great apps solve real problems. Whether it\'s cargo logistics '
-              'across Africa or AI tools for accessibility I care deeply about the '
-              'impact my code makes in the world.',
-          style: AppStyles.bodyMedium,
-        ).animate(delay: 200.ms).fadeIn(duration: 600.ms),
-
-        const SizedBox(height: 32),
-
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: [
-            '📍 Pakistan',
-            '🎓 CS Graduate',
-            '💼 3+ Years Exp',
-            '🌍 Live in 4 Countries',
-            '⭐ 5-Star Upwork',
-          ]
-              .map((s) => Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.border),
-              borderRadius: BorderRadius.circular(100),
-              color: AppColors.bgGlass,
-            ),
-            child: Text(s, style: AppStyles.bodyMedium.copyWith(fontSize: 13)),
-          ))
-              .toList(),
-        ).animate(delay: 300.ms).fadeIn(duration: 600.ms),
+        Expanded(flex: 5, child: _buildAvatarCard()),
+        const SizedBox(width: 60),
+        Expanded(flex: 7, child: _buildInfoColumn(context, false)),
       ],
     );
   }
 
-  Widget _right() {
-    final cards = [
-      {
-        'icon': '🚀',
-        'title': 'Live Products',
-        'desc': 'Built and shipped apps running live in production across multiple countries.',
-      },
-      {
-        'icon': '🤖',
-        'title': 'AI Integration',
-        'desc': 'Integrating OpenAI, Gemini, and custom ML models into Flutter apps.',
-      },
-      {
-        'icon': '🎨',
-        'title': 'UI/UX Focused',
-        'desc': 'Every pixel matters. I design beautiful interfaces before writing a line of code.',
-      },
-      {
-        'icon': '⚡',
-        'title': 'Performance First',
-        'desc': 'Smooth 60fps animations and optimized builds across all platforms.',
-      },
-    ];
-
+  Widget _buildMobileLayout(BuildContext context) {
     return Column(
-      children: cards
-          .asMap()
-          .entries
-          .map(
-            (e) => Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: _card(e.value)
-              .animate(delay: Duration(milliseconds: 100 * e.key))
-              .fadeIn(duration: 500.ms)
-              .slideX(begin: 0.2, end: 0),
-        ),
-      )
-          .toList(),
+      children: [
+        _buildAvatarCard(),
+        const SizedBox(height: 32),
+        _buildInfoColumn(context, true),
+      ],
     );
   }
 
-  Widget _card(Map<String, String> data) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: const Color(0xFF111118),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.border),
+  Widget _buildAvatarCard() {
+    return FadeInLeft(
+      child: GlassCard(
+        hoverable: false,
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          children: [
+            // Avatar placeholder
+            Container(
+              width: 140,
+              height: 140,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: AppColors.primaryGrad,
+              ),
+              child: Center(
+                child: Text(
+                  'U',
+                  style: GoogleFonts.syne(
+                    fontSize: 64,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.bg,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              PortfolioData.fullName,
+              style: AppTextStyles.label(20),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              PortfolioData.role,
+              style: AppTextStyles.badge(14),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              PortfolioData.location,
+              style: AppTextStyles.body(13),
+              textAlign: TextAlign.center,
+            ),
+            const Divider(color: AppColors.border, height: 32),
+            // Quick info
+            _InfoRow(Icons.email_rounded, PortfolioData.email),
+            const SizedBox(height: 8),
+            _InfoRow(Icons.phone_rounded, PortfolioData.phone),
+          ],
+        ),
       ),
-      child: Row(
+    );
+  }
+
+  Widget _buildInfoColumn(BuildContext context, bool isMobile) {
+    return FadeInRight(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 44, height: 44,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(12),
+          ShaderMask(
+            shaderCallback: (b) => AppColors.primaryGrad.createShader(b),
+            child: Text(
+              'Flutter Developer\n& Mobile Specialist',
+              style: AppTextStyles.sectionTitle(
+                isMobile ? 24 : 30,
+              ),
             ),
-            child: Center(child: Text(data['icon']!, style: const TextStyle(fontSize: 20))),
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(data['title']!, style: AppStyles.headingMedium.copyWith(fontSize: 16)),
-                const SizedBox(height: 6),
-                Text(data['desc']!, style: AppStyles.bodyMedium),
-              ],
-            ),
+          const SizedBox(height: 20),
+          Text(
+            PortfolioData.aboutText.trim(),
+            style: AppTextStyles.body(Responsive.bodySize(context)),
+          ),
+          const SizedBox(height: 28),
+
+          // Highlights
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              _HighlightChip('📱 5+ Years Flutter'),
+              _HighlightChip('🔥 Firebase Expert'),
+              _HighlightChip('🤖 AI Integration'),
+              _HighlightChip('🚀 10+ Play Store Apps'),
+            ],
+          ),
+
+          const SizedBox(height: 32),
+
+          // Download CV button
+          GradientButton(
+            label: 'Download CV',
+            onTap: () {},
+            icon: Icons.download_rounded,
           ),
         ],
       ),
+    );
+  }
+}
+
+class _InfoRow extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const _InfoRow(this.icon, this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 16, color: AppColors.primary),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            text,
+            style: AppTextStyles.body(13),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HighlightChip extends StatelessWidget {
+  final String label;
+  const _HighlightChip(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+      ),
+      child: Text(label,
+          style: GoogleFonts.spaceGrotesk(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: AppColors.primary,
+          )),
     );
   }
 }

@@ -1,72 +1,133 @@
-import 'package:flutter/material.dart';
-import '../../core/utils/responsive_helper.dart';
-import '../../core/widgets/section_title.dart';
-import '../../data/portfolio_data.dart';
-import 'widgets/skill_category.dart';
+// lib/screens/sections/skills_section.dart
 
-class SkillsSection extends StatelessWidget {
+import 'package:flutter/material.dart';
+
+import 'package:visibility_detector/visibility_detector.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/theme/app_theme.dart';
+import '../../core/utils/responsive.dart';
+import '../../core/widgets/common_widgets.dart';
+import '../../data/portfolio_data.dart';
+
+
+class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
 
   @override
+  State<SkillsSection> createState() => _SkillsSectionState();
+}
+
+class _SkillsSectionState extends State<SkillsSection> {
+  bool _visible = false;
+
+  @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveHelper.isMobile(context);
-    final padding = ResponsiveHelper.sectionPadding(context);
+    final isMobile = Responsive.isMobile(context);
 
-    // Group skills by category
-    final Map<String, List<dynamic>> grouped = {};
-    for (final s in PortfolioData.skills) {
-      grouped.putIfAbsent(s.category, () => []).add(s);
-    }
-
-    final categories = grouped.entries.toList();
-
-    return Container(
-      padding: padding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SectionTitle(
-            label: 'Skills',
-            title: 'Skills & Expertise',
-            subtitle: 'Technologies and tools I use to bring ideas to life.',
-          ),
-          const SizedBox(height: 60),
-          if (isMobile)
-            Column(
-              children: categories
-                  .asMap()
-                  .entries
-                  .map(
-                    (e) => Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: SkillCategory(
-                    category: e.value.key,
-                    skills: e.value.value.cast(),
-                    delayMs: e.key * 100,
-                  ),
+    return VisibilityDetector(
+      key: const Key('skills-section'),
+      onVisibilityChanged: (info) {
+        if (info.visibleFraction > 0.2 && !_visible) {
+          setState(() => _visible = true);
+        }
+      },
+      child: Container(
+        width: double.infinity,
+        color: AppColors.bgCard,
+        child: SectionWrapper(
+          backgroundColor: Colors.transparent,
+          child: Column(
+            children: [
+              FadeInUp(
+                child: const SectionHeader(
+                  badge: '✦  Skills',
+                  title: 'My Technical Arsenal',
+                  subtitle: 'Technologies I work with daily to build production-grade apps',
                 ),
-              )
-                  .toList(),
-            )
-          else
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 1.1,
               ),
-              itemCount: categories.length,
-              itemBuilder: (_, i) => SkillCategory(
-                category: categories[i].key,
-                skills: categories[i].value.cast(),
-                delayMs: i * 100,
+              SizedBox(height: isMobile ? 40 : 60),
+
+              // Skill bars grid
+              FadeInUp(
+                delay: const Duration(milliseconds: 200),
+                child: isMobile
+                    ? Column(
+                  children: PortfolioData.skills
+                      .map((s) => AnimatedSkillBar(
+                    name: s['name'],
+                    level: s['level'],
+                    category: s['category'],
+                    animate: _visible,
+                  ))
+                      .toList(),
+                )
+                    : _buildGridSkills(),
               ),
-            ),
-        ],
+
+              SizedBox(height: isMobile ? 40 : 60),
+
+              // Tech stack badges
+              FadeInUp(
+                delay: const Duration(milliseconds: 300),
+                child: Column(
+                  children: [
+                    Text(
+                      'Tech Stack & Tools',
+                      style: AppTextStyles.label(18),
+                    ),
+                    const SizedBox(height: 20),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.center,
+                      children: PortfolioData.techStack
+                          .map((t) => TechBadge(label: t))
+                          .toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget _buildGridSkills() {
+    final half = (PortfolioData.skills.length / 2).ceil();
+    final left = PortfolioData.skills.sublist(0, half);
+    final right = PortfolioData.skills.sublist(half);
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            children: left
+                .map((s) => AnimatedSkillBar(
+              name: s['name'],
+              level: s['level'],
+              category: s['category'],
+              animate: _visible,
+            ))
+                .toList(),
+          ),
+        ),
+        const SizedBox(width: 40),
+        Expanded(
+          child: Column(
+            children: right
+                .map((s) => AnimatedSkillBar(
+              name: s['name'],
+              level: s['level'],
+              category: s['category'],
+              animate: _visible,
+            ))
+                .toList(),
+          ),
+        ),
+      ],
     );
   }
 }
