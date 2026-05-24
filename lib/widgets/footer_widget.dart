@@ -1,11 +1,11 @@
 // lib/widgets/footer_widget.dart
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../core/constants/app_colors.dart';
-import '../core/theme/app_theme.dart' hide AppColors;
-import '../core/utils/responsive.dart';
 import '../data/portfolio_data.dart';
+import '../core/constants/app_colors.dart';
+import '../core/theme/app_theme.dart';
+import '../core/utils/responsive.dart';
+
 
 
 class FooterWidget extends StatelessWidget {

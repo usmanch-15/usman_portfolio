@@ -1,15 +1,14 @@
-// lib/widgets/common_widgets.dart
-// Reusable UI components used across all sections
+// lib/core/widgets/common_widgets.dart
+// Reusable UI components — SectionWrapper, SectionHeader, GlassCard, GradientButton, SkillBar, TechBadge
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../constants/app_colors.dart';
-import '../theme/app_theme.dart' hide AppColors;
+import 'package:animate_do/animate_do.dart';           // ← FIX: FadeInUp etc
+import '../constants/app_colors.dart';                  // ← FIX: single source
+import '../theme/app_theme.dart';                       // ← AppTextStyles
 import '../utils/responsive.dart';
 
 // ─── Section Wrapper ─────────────────────────────────────────────────────────
-/// Wraps each section with consistent padding, max-width, and background
 class SectionWrapper extends StatelessWidget {
   final Widget child;
   final Color? backgroundColor;
@@ -57,7 +56,6 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Badge chip
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
           decoration: BoxDecoration(
@@ -71,9 +69,7 @@ class SectionHeader extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.center,
-          style: AppTextStyles.sectionTitle(
-            Responsive.sectionTitleSize(context),
-          ),
+          style: AppTextStyles.sectionTitle(Responsive.sectionTitleSize(context)),
         ),
         if (subtitle != null) ...[
           const SizedBox(height: 12),
@@ -86,8 +82,6 @@ class SectionHeader extends StatelessWidget {
             ),
           ),
         ],
-        const SizedBox(height: 8),
-        // Decorative underline
         Container(
           width: 60,
           height: 3,
@@ -134,6 +128,7 @@ class _GradientButtonState extends State<GradientButton> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           transform: Matrix4.identity()..scale(_hovered ? 1.03 : 1.0),
+          transformAlignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
           decoration: BoxDecoration(
             gradient: widget.outlined ? null : AppColors.primaryGrad,
@@ -142,20 +137,24 @@ class _GradientButtonState extends State<GradientButton> {
                 ? Border.all(color: AppColors.primary, width: 2)
                 : null,
             boxShadow: _hovered && !widget.outlined
-                ? [BoxShadow(
-              color: AppColors.primary.withOpacity(0.4),
-              blurRadius: 20,
-              offset: const Offset(0, 6),
-            )]
+                ? [
+              BoxShadow(
+                color: AppColors.primary.withOpacity(0.4),
+                blurRadius: 20,
+                offset: const Offset(0, 6),
+              )
+            ]
                 : [],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.icon != null) ...[
-                Icon(widget.icon,
-                    size: 18,
-                    color: widget.outlined ? AppColors.primary : AppColors.bg),
+                Icon(
+                  widget.icon,
+                  size: 18,
+                  color: widget.outlined ? AppColors.primary : AppColors.bg,
+                ),
                 const SizedBox(width: 8),
               ],
               Text(
@@ -197,19 +196,15 @@ class _GlassCardState extends State<GlassCard> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (_) => widget.hoverable
-          ? setState(() => _hovered = true)
-          : null,
-      onExit:  (_) => widget.hoverable
-          ? setState(() => _hovered = false)
-          : null,
+      onEnter: (_) => widget.hoverable ? setState(() => _hovered = true)  : null,
+      onExit:  (_) => widget.hoverable ? setState(() => _hovered = false) : null,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         transform: Matrix4.identity()
           ..translate(0.0, _hovered ? -4.0 : 0.0),
         padding: widget.padding ?? const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          gradient: AppColors.cardGrad,
+          gradient: AppColors.cardGrad,           // ← FIX
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: _hovered
@@ -217,16 +212,20 @@ class _GlassCardState extends State<GlassCard> {
                 : AppColors.border,
           ),
           boxShadow: _hovered
-              ? [BoxShadow(
-            color: AppColors.primary.withOpacity(0.1),
-            blurRadius: 30,
-            offset: const Offset(0, 10),
-          )]
-              : [BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          )],
+              ? [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.1),
+              blurRadius: 30,
+              offset: const Offset(0, 10),
+            )
+          ]
+              : [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            )
+          ],
         ),
         child: widget.child,
       ),
@@ -234,10 +233,10 @@ class _GlassCardState extends State<GlassCard> {
   }
 }
 
-// ─── Skill Bar ───────────────────────────────────────────────────────────────
+// ─── Animated Skill Bar ──────────────────────────────────────────────────────
 class AnimatedSkillBar extends StatefulWidget {
   final String name;
-  final double level; // 0.0 to 1.0
+  final double level;
   final String category;
   final bool animate;
 
@@ -266,7 +265,7 @@ class _AnimatedSkillBarState extends State<AnimatedSkillBar>
       duration: const Duration(milliseconds: 1200),
     );
     _anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic)
-        .drive(Tween(begin: 0, end: widget.level));
+        .drive(Tween(begin: 0.0, end: widget.level));
     if (widget.animate) _ctrl.forward();
   }
 
@@ -306,7 +305,7 @@ class _AnimatedSkillBarState extends State<AnimatedSkillBar>
           Container(
             height: 6,
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: AppColors.surface,             // ← FIX
               borderRadius: BorderRadius.circular(3),
             ),
             child: AnimatedBuilder(
@@ -322,7 +321,7 @@ class _AnimatedSkillBarState extends State<AnimatedSkillBar>
                       BoxShadow(
                         color: AppColors.primary.withOpacity(0.5),
                         blurRadius: 6,
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -338,7 +337,6 @@ class _AnimatedSkillBarState extends State<AnimatedSkillBar>
 // ─── Tech Badge ──────────────────────────────────────────────────────────────
 class TechBadge extends StatelessWidget {
   final String label;
-
   const TechBadge({super.key, required this.label});
 
   @override
@@ -346,7 +344,7 @@ class TechBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.surface,                  // ← FIX
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.border),
       ),
@@ -355,7 +353,7 @@ class TechBadge extends StatelessWidget {
         style: GoogleFonts.spaceGrotesk(
           fontSize: 13,
           fontWeight: FontWeight.w500,
-          color: AppColors.textSecond,
+          color: AppColors.textSecond,             // ← FIX
         ),
       ),
     );

@@ -1,10 +1,8 @@
-// lib/widgets/nav_bar.dart
-// Responsive navigation bar with desktop links + mobile hamburger drawer
+// lib/core/widgets/nav_bar.dart
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../constants/app_colors.dart';
+import '../constants/app_colors.dart';   // ← FIX: single source
 import '../utils/responsive.dart';
 
 class NavBar extends StatefulWidget {
@@ -50,9 +48,11 @@ class _NavBarState extends State<NavBar> {
     if (index >= widget.sectionKeys.length) return;
     final ctx = widget.sectionKeys[index].currentContext;
     if (ctx != null) {
-      Scrollable.ensureVisible(ctx,
-          duration: const Duration(milliseconds: 600),
-          curve: Curves.easeInOut);
+      Scrollable.ensureVisible(
+        ctx,
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -64,9 +64,7 @@ class _NavBarState extends State<NavBar> {
       duration: const Duration(milliseconds: 200),
       height: 64,
       decoration: BoxDecoration(
-        color: _scrolled
-            ? AppColors.bg.withOpacity(0.95)
-            : Colors.transparent,
+        color: _scrolled ? AppColors.bg.withOpacity(0.95) : Colors.transparent,
         boxShadow: _scrolled
             ? [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 20)]
             : [],
@@ -88,46 +86,39 @@ class _NavBarState extends State<NavBar> {
                 GestureDetector(
                   onTap: () => _scrollTo(0),
                   child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'U',
-                          style: GoogleFonts.syne(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.primary,
-                          ),
+                    text: TextSpan(children: [
+                      TextSpan(
+                        text: 'U',
+                        style: GoogleFonts.syne(
+                          fontSize: 24, fontWeight: FontWeight.w800,
+                          color: AppColors.primary,
                         ),
-                        TextSpan(
-                          text: 'sman',
-                          style: GoogleFonts.syne(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.textPrimary,
-                          ),
+                      ),
+                      TextSpan(
+                        text: 'sman',
+                        style: GoogleFonts.syne(
+                          fontSize: 24, fontWeight: FontWeight.w800,
+                          color: AppColors.textPrimary,
                         ),
-                        TextSpan(
-                          text: '.',
-                          style: GoogleFonts.syne(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                            color: AppColors.primary,
-                          ),
+                      ),
+                      TextSpan(
+                        text: '.',
+                        style: GoogleFonts.syne(
+                          fontSize: 24, fontWeight: FontWeight.w800,
+                          color: AppColors.primary,
                         ),
-                      ],
-                    ),
+                      ),
+                    ]),
                   ),
                 ),
 
                 // Desktop nav links
                 if (!isMobile)
                   Row(
-                    children: List.generate(_navItems.length, (i) {
-                      return _NavLink(
-                        label: _navItems[i],
-                        onTap: () => _scrollTo(i),
-                      );
-                    }),
+                    children: List.generate(
+                      _navItems.length,
+                          (i) => _NavLink(label: _navItems[i], onTap: () => _scrollTo(i)),
+                    ),
                   ),
 
                 // Mobile hamburger
@@ -167,7 +158,6 @@ class _NavBarState extends State<NavBar> {
 class _NavLink extends StatefulWidget {
   final String label;
   final VoidCallback onTap;
-
   const _NavLink({required this.label, required this.onTap});
 
   @override
@@ -194,7 +184,7 @@ class _NavLinkState extends State<_NavLink> {
                 style: GoogleFonts.spaceGrotesk(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: _hovered ? AppColors.primary : AppColors.textSecond,
+                  color: _hovered ? AppColors.primary : AppColors.textSecond, // ← FIX
                 ),
                 child: Text(widget.label),
               ),
@@ -219,7 +209,6 @@ class _NavLinkState extends State<_NavLink> {
 class _MobileDrawer extends StatelessWidget {
   final List<String> items;
   final ValueChanged<int> onTap;
-
   const _MobileDrawer({required this.items, required this.onTap});
 
   @override
@@ -233,29 +222,30 @@ class _MobileDrawer extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Handle bar
           Container(
-            width: 40,
-            height: 4,
+            width: 40, height: 4,
             margin: const EdgeInsets.only(bottom: 24),
             decoration: BoxDecoration(
               color: AppColors.textMuted,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          ...List.generate(items.length, (i) => ListTile(
-            onTap: () => onTap(i),
-            title: Text(
-              items[i],
-              style: GoogleFonts.spaceGrotesk(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
+          ...List.generate(
+            items.length,
+                (i) => ListTile(
+              onTap: () => onTap(i),
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                items[i],
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 16, fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary,
+                ),
               ),
+              trailing: const Icon(Icons.arrow_forward_ios,
+                  size: 14, color: AppColors.primary),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios,
-                size: 14, color: AppColors.primary),
-          )),
+          ),
           const SizedBox(height: 8),
         ],
       ),

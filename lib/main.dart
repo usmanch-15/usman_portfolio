@@ -1,10 +1,18 @@
+// lib/main.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'app.dart';
+import 'features/home_page.dart';        // ← FIX: correct path
+import 'core/theme/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -16,18 +24,27 @@ void main() {
   runApp(const PortfolioApp());
 }
 
-class AppTheme {
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    scaffoldBackgroundColor: const Color(0xFF0F172A),
+class PortfolioApp extends StatelessWidget {
+  const PortfolioApp({super.key});
 
-    textTheme: GoogleFonts.poppinsTextTheme(
-      ThemeData.dark().textTheme,
-    ),
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Usman — Flutter Developer',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.dark,
+      home: const HomePage(),            // ← FIX: HomePage not HomeScreen
+      scrollBehavior: const _SmoothScrollBehavior(),
+    );
+  }
+}
 
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
-      brightness: Brightness.dark,
-    ),
-  );
+class _SmoothScrollBehavior extends ScrollBehavior {
+  const _SmoothScrollBehavior();
+
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) =>
+      const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      );
 }

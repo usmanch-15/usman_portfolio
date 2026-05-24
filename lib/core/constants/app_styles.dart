@@ -39,7 +39,7 @@ class AppStyles {
     height: 1.3,
   );
 
-  static const TextStyle bodyLarge = TextStyle(
+  static final TextStyle bodyLarge = TextStyle(
     fontFamily: 'Satoshi',
     fontSize: 18,
     fontWeight: FontWeight.w400,
@@ -47,7 +47,7 @@ class AppStyles {
     height: 1.7,
   );
 
-  static const TextStyle bodyMedium = TextStyle(
+  static final TextStyle bodyMedium = TextStyle(
     fontFamily: 'Satoshi',
     fontSize: 15,
     fontWeight: FontWeight.w400,

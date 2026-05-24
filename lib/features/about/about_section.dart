@@ -1,11 +1,12 @@
 // lib/screens/sections/about_section.dart
 
 import 'package:flutter/material.dart';
-
+import 'package:animate_do/animate_do.dart';                        // FadeInUp, FadeInLeft, FadeInRight
 import 'package:google_fonts/google_fonts.dart';
-import '../../core/theme/app_theme.dart';
-import '../../core/utils/responsive.dart';
-import '../../core/widgets/common_widgets.dart';
+import '../../core/constants/app_colors.dart';                      // AppColors
+import '../../core/theme/app_theme.dart';                           // AppTextStyles
+import '../../core/utils/responsive.dart';                          // Responsive
+import '../../core/widgets/common_widgets.dart';                    // SectionWrapper, SectionHeader, GlassCard, GradientButton
 import '../../data/portfolio_data.dart';
 
 

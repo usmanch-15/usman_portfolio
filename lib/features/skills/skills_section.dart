@@ -1,14 +1,12 @@
-// lib/screens/sections/skills_section.dart
-
+// lib/features/skills/skills_section.dart
 import 'package:flutter/material.dart';
-
+import 'package:animate_do/animate_do.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_colors.dart';                     // SIRF app_colors.dart — app_theme.dart IMPORT MAT KARO dono saath
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/responsive.dart';
 import '../../core/widgets/common_widgets.dart';
 import '../../data/portfolio_data.dart';
-
 
 class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
