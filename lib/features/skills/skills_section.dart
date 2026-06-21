@@ -281,7 +281,7 @@ class _SkillsSectionState extends State<SkillsSection>
         crossAxisCount: isTablet ? 2 : 3,
         mainAxisSpacing: 24,
         crossAxisSpacing: 24,
-        childAspectRatio: 0.82,
+        mainAxisExtent: 280,
       ),
       itemCount: cards.length,
       itemBuilder: (context, i) => FadeInUp(
@@ -390,13 +390,11 @@ class _SkillCardWidgetState extends State<_SkillCardWidget> {
 
               Text(c.title, style: AppTextStyles.label(17)),
               const SizedBox(height: 8),
-              Expanded(
-                child: Text(
-                  c.desc,
-                  style: AppTextStyles.body(13.5),
-                  maxLines: isMobile ? null : 4,
-                  overflow: isMobile ? null : TextOverflow.ellipsis,
-                ),
+              Text(
+                c.desc,
+                style: AppTextStyles.body(13.5),
+                maxLines: isMobile ? null : 4,
+                overflow: isMobile ? null : TextOverflow.ellipsis,
               ),
 
               const SizedBox(height: 16),
