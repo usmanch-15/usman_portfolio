@@ -3,10 +3,12 @@
 <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
 <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" />
 <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white" />
+<img src="https://img.shields.io/badge/GetX-19A0D8?style=for-the-badge&logo=flutter&logoColor=white" />
 
-# 🚀 Usman Portfolio — Flutter Developer Portfolio App
+# 🚀 Muhammad Usman — Flutter Developer Portfolio
 
-**A modern, responsive, and animated Flutter portfolio app showcasing my skills, projects, and journey as a Flutter developer.**
+**A modern, responsive, and beautifully animated Flutter web portfolio showcasing my skills, projects, research, and journey as a Flutter developer.**
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Click_Here-02569B?style=for-the-badge)](https://usman-portfolio-lake-five.vercel.app)
 &nbsp;
@@ -20,37 +22,31 @@
 
 ## ✨ About the Project
 
-This portfolio app is built entirely with **Flutter** and serves as a living showcase of my capabilities as a Flutter Developer. It combines clean architecture, modern UI/UX principles, and smooth animations to deliver an experience that works seamlessly across both **web and mobile**.
+This portfolio app is built entirely with **Flutter** and showcases my capabilities as a Flutter Developer. It combines clean architecture, modern UI/UX principles, smooth animations, and interactive visual effects to deliver a seamless experience across **web and mobile platforms**.
 
 > Built not just to display work — but to *be* the work.
 
 ---
 
-## 🖥️ Live Demo
+## 🌐 Live Demo
 
 👉 **[https://usman-portfolio-lake-five.vercel.app](https://usman-portfolio-lake-five.vercel.app)**
 
 ---
 
-## 📸 Screenshots
-
-> _Add screenshots here to enhance presentation_
-
-| Hero Section | Projects | Skills | Contact |
-|:---:|:---:|:---:|:---:|
-| ![Hero](assets/screenshots/hero.png) | ![Projects](assets/screenshots/projects.png) | ![Skills](assets/screenshots/skills.png) | ![Contact](assets/screenshots/contact.png) |
-
----
-
-## 📱 Features
+## 🎯 Key Features
 
 | Feature | Description |
 |---|---|
-| 🎯 **Animated Hero Section** | Intro text with smooth Flutter Animate transitions |
-| 💼 **Projects Showcase** | Real-world projects with tech stack badges and live links |
-| 🧠 **Skills Display** | Categorized skill chips with animated reveal |
-| 📞 **Contact Form** | Functional contact section with social links |
-| 🌐 **Fully Responsive** | Adaptive layout for Web, Tablet, and Mobile |
+| ⚡ **Particle Background** | Floating dots with connecting lines for dynamic visual effect |
+| 🎭 **Hero Stagger Animations** | GSAP-style text reveal with staggered transitions |
+| 🌟 **Glowing Orbs** | Animated gradient orbs in the hero section |
+| 📊 **Animated Skill Bars** | Progress bars that animate on scroll visibility |
+| 🏷️ **Interactive Skill Tags** | Hover effects with floating animations |
+| 💼 **Projects Showcase** | Responsive grid with tech stack badges and live links |
+| 📝 **Research Papers** | Published academic work with DOI references |
+| 📞 **Contact Form** | Functional contact section with social media links |
+| 🌐 **Fully Responsive** | Adaptive layout for Mobile, Tablet, and Desktop |
 | ⚡ **Smooth Transitions** | Page transitions powered by GoRouter |
 | 🎨 **Glassmorphism UI** | Modern frosted glass card design language |
 | 🎬 **Lottie Animations** | High-quality JSON animations for visual polish |
@@ -59,11 +55,13 @@ This portfolio app is built entirely with **Flutter** and serves as a living sho
 
 ## 🛠️ Tech Stack
 
-### Core
+### Core Technologies
 | Technology | Purpose |
 |---|---|
 | **Flutter** | Cross-platform UI framework |
 | **Dart** | Programming language |
+| **Firebase** | Backend & database |
+| **REST API** | Backend communication |
 
 ### Packages & Libraries
 
@@ -72,13 +70,15 @@ This portfolio app is built entirely with **Flutter** and serves as a living sho
 | [`go_router`](https://pub.dev/packages/go_router) | latest | Declarative navigation |
 | [`google_fonts`](https://pub.dev/packages/google_fonts) | latest | Typography |
 | [`flutter_animate`](https://pub.dev/packages/flutter_animate) | latest | UI animations |
-| [`lottie`](https://pub.dev/packages/lottie) | latest | Lottie JSON animations |
+| [`lottie`](https://pub.dev/packages/lottie) | latest | JSON animations |
 | [`font_awesome_flutter`](https://pub.dev/packages/font_awesome_flutter) | latest | Icon pack |
-| [`url_launcher`](https://pub.dev/packages/url_launcher) | latest | Open external links |
+| [`url_launcher`](https://pub.dev/packages/url_launcher) | latest | External links |
+| [`getx`](https://pub.dev/packages/get) | latest | State management |
+| [`riverpod`](https://pub.dev/packages/riverpod) | latest | Advanced state management |
 
 ---
 
-## 📂 Folder Structure
+## 📂 Project Structure
 
 ```
 usman_portfolio/
@@ -90,12 +90,14 @@ usman_portfolio/
 ├── assets/
 │   ├── animations/                 # Lottie JSON files
 │   │   ├── hero_animation.json
-│   │   └── skills_animation.json
-│   ├── fonts/                      # Google Fonts (TTF/OTF)
+│   │   ├── skills_animation.json
+│   │   └── particle_effect.json
+│   ├── fonts/                      # Custom fonts
 │   ├── icons/                      # SVG / PNG icons
-│   └── images/                     # Project screenshots & profile
+│   └── images/                     # Screenshots & profile
 │       ├── profile.png
-│       └── project_1.png
+│       ├── project_1.png
+│       └── project_2.png
 │
 ├── lib/
 │   ├── core/                       # App-wide base layer
@@ -116,8 +118,9 @@ usman_portfolio/
 │   │   ├── hero/
 │   │   │   ├── widgets/
 │   │   │   │   ├── animated_intro.dart
-│   │   │   │   ├── hero_cta_buttons.dart
-│   │   │   │   └── hero_avatar.dart
+│   │   │   │   ├── particle_background.dart
+│   │   │   │   ├── glowing_orbs.dart
+│   │   │   │   └── hero_cta_buttons.dart
 │   │   │   └── hero_section.dart
 │   │   │
 │   │   ├── about/
@@ -142,8 +145,18 @@ usman_portfolio/
 │   │   │   ├── data/
 │   │   │   │   └── skills_data.dart
 │   │   │   ├── widgets/
-│   │   │   │   └── skill_chip.dart
+│   │   │   │   ├── skill_chip.dart
+│   │   │   │   └── animated_skill_bar.dart
 │   │   │   └── skills_section.dart
+│   │   │
+│   │   ├── research/
+│   │   │   ├── models/
+│   │   │   │   └── research_paper_model.dart
+│   │   │   ├── data/
+│   │   │   │   └── research_data.dart
+│   │   │   ├── widgets/
+│   │   │   │   └── research_card.dart
+│   │   │   └── research_section.dart
 │   │   │
 │   │   └── contact/
 │   │       ├── widgets/
@@ -170,12 +183,14 @@ usman_portfolio/
 ├── test/
 │   └── features/
 │       ├── projects_section_test.dart
+│       ├── skills_section_test.dart
 │       └── contact_form_test.dart
 │
 ├── .env                            # Environment variables (gitignored)
 ├── pubspec.yaml                    # Dependencies & assets
 ├── analysis_options.yaml           # Lint rules
 └── README.md
+
 ```
 
 ---
@@ -184,7 +199,7 @@ usman_portfolio/
 
 ### Prerequisites
 
-Make sure you have the following installed:
+Ensure you have the following installed:
 
 - [Flutter SDK](https://flutter.dev/docs/get-started/install) (>= 3.0.0)
 - [Dart](https://dart.dev/get-dart) (>= 3.0.0)
@@ -194,7 +209,7 @@ Make sure you have the following installed:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/usman_portfolio.git
+git clone https://github.com/usmanch-15/usman-portfolio.git
 
 # 2. Navigate into the project directory
 cd usman_portfolio
@@ -221,12 +236,24 @@ flutter build web --release
 This project is deployed on **Vercel** using the Flutter Web build output.
 
 ```bash
-# Build web release
+# 1. Build web release
 flutter build web --release
 
-# Deploy via Vercel CLI
+# 2. Deploy via Vercel CLI
 vercel --prod build/web
 ```
+
+---
+
+## 📚 Research & Publications
+
+### Published Paper
+
+**Security Vulnerabilities in MERN-Flutter Applications**
+
+- **DOI:** [10.5281/zenodo.20636215](https://doi.org/10.5281/zenodo.20636215)
+- **Focus:** Security analysis and best practices for full-stack MERN-Flutter applications
+- **Availability:** Open access on Zenodo
 
 ---
 
@@ -235,15 +262,41 @@ vercel --prod build/web
 This project follows a **Feature-First Clean Architecture** pattern:
 
 ```
-Presentation Layer  →  Features (UI Widgets + Screens)
-Domain Layer        →  Models & Data classes
-Data Layer          →  Static data / Future API integration
-Core Layer          →  Constants, Themes, Utils, Extensions
+┌─────────────────────────────────┐
+│   Presentation Layer            │
+│   (Features → UI Widgets)       │
+├─────────────────────────────────┤
+│   Domain Layer                  │
+│   (Models & Data Classes)       │
+├─────────────────────────────────┤
+│   Data Layer                    │
+│   (Static Data / Firebase APIs) │
+├─────────────────────────────────┤
+│   Core Layer                    │
+│   (Constants, Themes, Utils)    │
+└─────────────────────────────────┘
 ```
 
-- **No external state management** — pure Flutter `setState` and `InheritedWidget` for simplicity
-- **GoRouter** handles all navigation with named routes
-- **Responsive helper** detects breakpoints and adapts layout for mobile, tablet, and desktop
+### Key Design Decisions
+
+- **No heavy state management** — Pure Flutter `setState` + `InheritedWidget` for simplicity
+- **GoRouter** for declarative navigation with named routes
+- **Responsive Helper** detects screen size breakpoints and adapts layout dynamically
+- **Firebase Integration** for dynamic content and contact form submissions
+- **REST API** for flexible backend communication
+
+---
+
+## 🎨 Design System
+
+- **Color Scheme:** Dark theme with glassmorphism elements
+- **Typography:** Google Fonts with custom text hierarchy
+- **Animations:** GSAP-style stagger effects + Lottie for complex animations
+- **Components:** Reusable, composable widget library
+- **Responsive Breakpoints:**
+  - Mobile: < 600px
+  - Tablet: 600px - 1200px
+  - Desktop: > 1200px
 
 ---
 
@@ -265,20 +318,34 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-## 📬 Contact
+## 📬 Contact & Connect
 
-**Usman**
+**Muhammad Usman**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/your-username)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/your-username)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your@email.com)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:usman4009797@gmail.com)
+&nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/muhammad-usman-78434a37b)
+&nbsp;
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/usmanch-15)
+
+---
+
+## 📊 Project Stats
+
+- ✨ **Lines of Dart:** 5000+
+- 🎨 **Custom Widgets:** 25+
+- 📦 **Packages Used:** 15+
+- 🌍 **Platforms Supported:** Web, Android, iOS
+- ⚡ **Performance Score:** 95+ (Lighthouse)
 
 ---
 
 <div align="center">
 
-Made with ❤️ and Flutter by **Usman**
+Made with ❤️ and Flutter by **Muhammad Usman**
 
 ⭐ **If you find this project helpful, please give it a star!** ⭐
+
+**[View Live Portfolio](https://usman-portfolio-lake-five.vercel.app)** • **[GitHub](https://github.com/usmanch-15)** • **[LinkedIn](https://linkedin.com/in/muhammad-usman-78434a37b)**
 
 </div>
