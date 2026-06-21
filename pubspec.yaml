@@ -1,5 +1,5 @@
 name: usman_portfolio
-description: Muhammad Usman - Flutter Developer Portfolio
+description: Muhammad Usman — Flutter & MERN Stack Developer Portfolio
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -18,7 +18,10 @@ dependencies:
   # Animations
   flutter_animate: ^4.5.0
   lottie: ^3.1.0
-  animate_do: ^3.3.4          # ← FIX: FadeInUp/FadeInLeft etc ke liye zaroori
+  animate_do: ^3.3.4
+
+  # NEW: Particles background
+  particles_flutter: ^0.1.4
 
   # UI
   google_fonts: ^8.1.0
@@ -31,6 +34,7 @@ dependencies:
   url_launcher: ^6.2.5
   universal_html: ^2.2.4
   scroll_to_index: ^3.0.1
+  shared_preferences: ^2.2.3
 
   # Icons
   font_awesome_flutter: ^11.0.0
@@ -43,7 +47,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-
   assets:
     - assets/images/profile.png
     - assets/cv/usman_cv.pdf
+    - assets/images/projects/

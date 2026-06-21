@@ -1,3 +1,6 @@
+// lib/features/home_page.dart
+// Updated — Research section added between Projects and Services
+
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../core/utils/scroll_controller.dart';
@@ -8,6 +11,7 @@ import 'about/about_section.dart';
 import 'skills/skills_section.dart';
 import 'experience/experience_section.dart';
 import 'projects/projects_section.dart';
+import 'research/research_section.dart';
 import 'services/services_section.dart';
 import 'contact/contact_section.dart';
 import 'footer/footer_widget.dart';
@@ -37,8 +41,9 @@ class HomePage extends StatelessWidget {
               _section(2, const SkillsSection()),
               _section(3, const ExperienceSection()),
               _section(4, const ProjectsSection()),
-              _section(5, const ServicesSection()),
-              _section(6, const ContactSection()),
+              _section(5, const ResearchSection()),   // ← NEW
+              _section(6, const ServicesSection()),
+              _section(7, const ContactSection()),
               const FooterWidget(),
             ],
           ),

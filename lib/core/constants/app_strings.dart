@@ -1,3 +1,4 @@
+// lib/core/constants/app_strings.dart
 class AppStrings {
   AppStrings._();
 
@@ -9,7 +10,7 @@ class AppStrings {
   static const String bio      =
       "Flutter developer from Pakistan. "
       "I've shipped cargo logistics across 4 African countries and built AI tools "
-      "for the visually impaired. Clean code, real impact  that's the standard I work to.";
+      "for the visually impaired. Clean code, real impact — that's the standard I work to.";
 
   static const String email    = 'usman4009797@gmail.com';
   static const String github   = 'https://github.com/usmanch-15';
@@ -20,12 +21,12 @@ class AppStrings {
   static const String cvAssetPath = 'assets/cv/usman_cv.pdf';
   static const String cvFileName  = 'usman_cv.pdf';
 
-  // Nav
+  // Nav — Research added
   static const List<String> navItems = [
-    'Home', 'About', 'Skills', 'Experience', 'Projects', 'Services', 'Contact'
+    'Home', 'About', 'Skills', 'Experience', 'Projects', 'Research', 'Services', 'Contact'
   ];
   static const List<String> navSectionIds = [
-    'hero', 'about', 'skills', 'experience', 'projects', 'services', 'contact'
+    'hero', 'about', 'skills', 'experience', 'projects', 'research', 'services', 'contact'
   ];
 
   // Section titles
@@ -33,6 +34,7 @@ class AppStrings {
   static const String skillsTitle     = 'Skills & Expertise';
   static const String experienceTitle = 'Experience';
   static const String projectsTitle   = 'Projects';
+  static const String researchTitle   = 'Published Research';
   static const String servicesTitle   = 'Services';
   static const String contactTitle    = "Let's Build Together";
 }

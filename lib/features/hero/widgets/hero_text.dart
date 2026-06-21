@@ -1,5 +1,7 @@
+// lib/features/hero/widgets/hero_text.dart
+// Updated — StaggerText animation added (Abdullah wali GSAP style)
+
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/constants/app_styles.dart';
@@ -8,6 +10,7 @@ import '../../../core/utils/scroll_controller.dart';
 import '../../../core/utils/url_launcher_helper.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/typing_animation.dart';
+import '../../../core/widgets/stagger_text.dart';
 
 class HeroText extends StatelessWidget {
   const HeroText({super.key});
@@ -16,10 +19,11 @@ class HeroText extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = ResponsiveHelper.isMobile(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return StaggerText(
+      itemDelay: const Duration(milliseconds: 120),
+      itemDuration: const Duration(milliseconds: 650),
       children: [
-        // Available badge
+        // 1. Available badge
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
           decoration: BoxDecoration(
@@ -31,7 +35,8 @@ class HeroText extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 8, height: 8,
+                width: 8,
+                height: 8,
                 decoration: const BoxDecoration(
                   color: Color(0xFF22C55E),
                   shape: BoxShape.circle,
@@ -50,55 +55,49 @@ class HeroText extends StatelessWidget {
               ),
             ],
           ),
-        )
-            .animate()
-            .fadeIn(duration: 500.ms)
-            .slideY(begin: 0.3, end: 0),
+        ),
 
+        // 2. Spacer
         const SizedBox(height: 24),
 
-        // Name
+        // 3. Name
         Text(
           AppStrings.name,
           style: AppStyles.displayLarge.copyWith(
             fontSize: isMobile ? 42 : 72,
           ),
-        )
-            .animate(delay: 100.ms)
-            .fadeIn(duration: 600.ms)
-            .slideY(begin: 0.3, end: 0),
+        ),
 
+        // 4. Spacer
         const SizedBox(height: 12),
 
-        // Typing roles
+        // 5. Typing roles
         SizedBox(
           height: isMobile ? 52 : 68,
           child: TypingAnimation(
             texts: [AppStrings.role, AppStrings.role2, AppStrings.role3],
           ),
-        ).animate(delay: 200.ms).fadeIn(duration: 600.ms),
+        ),
 
+        // 6. Spacer
         const SizedBox(height: 24),
 
-        // Tagline
+        // 7. Tagline
         Text(
           AppStrings.tagline,
           style: AppStyles.bodyLarge.copyWith(fontSize: isMobile ? 15 : 18),
-        )
-            .animate(delay: 300.ms)
-            .fadeIn(duration: 600.ms)
-            .slideY(begin: 0.2, end: 0),
+        ),
 
+        // 8. Spacer
         const SizedBox(height: 16),
 
-        // Bio
-        Text(AppStrings.bio, style: AppStyles.bodyMedium)
-            .animate(delay: 400.ms)
-            .fadeIn(duration: 600.ms),
+        // 9. Bio
+        Text(AppStrings.bio, style: AppStyles.bodyMedium),
 
+        // 10. Spacer
         const SizedBox(height: 40),
 
-        // Buttons
+        // 11. Buttons
         Wrap(
           spacing: 16,
           runSpacing: 12,
@@ -115,14 +114,12 @@ class HeroText extends StatelessWidget {
               onTap: () => UrlLauncherHelper.downloadCv(),
             ),
           ],
-        )
-            .animate(delay: 500.ms)
-            .fadeIn(duration: 600.ms)
-            .slideY(begin: 0.2, end: 0),
+        ),
 
+        // 12. Spacer
         const SizedBox(height: 40),
 
-        // Social icons
+        // 13. Social icons
         Row(
           children: [
             _socialIcon(Icons.code, AppStrings.github),
@@ -133,7 +130,7 @@ class HeroText extends StatelessWidget {
             const SizedBox(width: 12),
             _socialIcon(Icons.email_outlined, 'mailto:${AppStrings.email}'),
           ],
-        ).animate(delay: 600.ms).fadeIn(duration: 600.ms),
+        ),
       ],
     );
   }
@@ -144,7 +141,8 @@ class HeroText extends StatelessWidget {
       child: GestureDetector(
         onTap: () => UrlLauncherHelper.openUrl(url),
         child: Container(
-          width: 44, height: 44,
+          width: 44,
+          height: 44,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.border),
             borderRadius: BorderRadius.circular(12),

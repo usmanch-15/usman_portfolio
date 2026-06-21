@@ -1,12 +1,11 @@
 // lib/core/theme/app_theme.dart
-// SIRF Theme data yahan hai — AppColors yahan DEFINE NAHI hai
-// Import: import '../core/theme/app_theme.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../constants/app_colors.dart'; // ← AppColors sirf yahan se aata hai
+import '../constants/app_colors.dart';
 
 class AppTheme {
+  // ── Dark Theme ──────────────────────────────────────────
   static ThemeData get dark => ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: AppColors.bg,
@@ -46,48 +45,77 @@ class AppTheme {
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.bg,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        textStyle: GoogleFonts.spaceGrotesk(
-          fontWeight: FontWeight.w700,
-          fontSize: 15,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        textStyle: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w700, fontSize: 15),
+      ),
+    ),
+  );
+
+  // ── Light Theme ─────────────────────────────────────────
+  static ThemeData get light => ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: const Color(0xFFF1F5F9),
+    colorScheme: const ColorScheme.light(
+      primary: Color(0xFF0EA5E9),
+      secondary: Color(0xFF818CF8),
+      surface: Color(0xFFFFFFFF),
+    ),
+    textTheme: GoogleFonts.spaceGroteskTextTheme().apply(
+      bodyColor: const Color(0xFF0F172A),
+      displayColor: const Color(0xFF0F172A),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: Color(0xFF0EA5E9), width: 2),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF0EA5E9),
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        textStyle: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w700, fontSize: 15),
       ),
     ),
   );
 }
 
-// ─── Text Styles ─────────────────────────────────────────────────────────────
+// ─── Text Styles ─────────────────────────────────────────
 class AppTextStyles {
   static TextStyle heroTitle(double size) => GoogleFonts.syne(
-    fontSize: size,
-    fontWeight: FontWeight.w800,
-    color: AppColors.textPrimary,
-    height: 1.1,
+    fontSize: size, fontWeight: FontWeight.w800,
+    color: AppColors.textPrimary, height: 1.1,
   );
 
   static TextStyle sectionTitle(double size) => GoogleFonts.syne(
-    fontSize: size,
-    fontWeight: FontWeight.w700,
+    fontSize: size, fontWeight: FontWeight.w700,
     color: AppColors.textPrimary,
   );
 
   static TextStyle body(double size) => GoogleFonts.spaceGrotesk(
-    fontSize: size,
-    color: AppColors.textSecond,
-    height: 1.7,
+    fontSize: size, color: AppColors.textSecond, height: 1.7,
   );
 
   static TextStyle label(double size) => GoogleFonts.spaceGrotesk(
-    fontSize: size,
-    fontWeight: FontWeight.w600,
+    fontSize: size, fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
 
   static TextStyle badge(double size) => GoogleFonts.spaceGrotesk(
-    fontSize: size,
-    fontWeight: FontWeight.w700,
+    fontSize: size, fontWeight: FontWeight.w700,
     color: AppColors.primary,
   );
 }
