@@ -6,6 +6,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/responsive.dart';
 import '../../core/widgets/common_widgets.dart';                    // SectionWrapper, SectionHeader, GlassCard
+import '../../core/utils/url_launcher_helper.dart';
 import '../../data/portfolio_data.dart';
 
 class ContactSection extends StatefulWidget {
@@ -36,7 +37,21 @@ class _ContactSectionState extends State<ContactSection> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _sending = true);
-    await Future.delayed(const Duration(seconds: 2));
+
+    final subject = _subjectCtrl.text.trim().isEmpty
+        ? 'Portfolio Contact — ${_nameCtrl.text.trim()}'
+        : _subjectCtrl.text.trim();
+    final body =
+        'Name: ${_nameCtrl.text.trim()}\n'
+        'Email: ${_emailCtrl.text.trim()}\n\n'
+        '${_msgCtrl.text.trim()}';
+
+    await UrlLauncherHelper.sendEmail(
+      PortfolioData.email,
+      subject: subject,
+      body: body,
+    );
+
     setState(() {
       _sending = false;
       _sent = true;
@@ -142,12 +157,12 @@ class _ContactSectionState extends State<ContactSection> {
             _SocialButton(
               label: 'GitHub',
               icon: Icons.code_rounded,
-              onTap: () {},
+              onTap: () => UrlLauncherHelper.openUrl(PortfolioData.github),
             ),
             _SocialButton(
               label: 'LinkedIn',
               icon: Icons.work_rounded,
-              onTap: () {},
+              onTap: () => UrlLauncherHelper.openUrl(PortfolioData.linkedin),
             ),
           ],
         ),
@@ -193,7 +208,8 @@ class _ContactSectionState extends State<ContactSection> {
             Text('Message Sent!', style: AppTextStyles.label(20)),
             const SizedBox(height: 8),
             Text(
-              'Thank you! I\'ll get back to you within 24 hours.',
+              'Your email app should have opened with the message ready to send. '
+                  'I\'ll get back to you within 24 hours.',
               textAlign: TextAlign.center,
               style: AppTextStyles.body(14),
             ),

@@ -8,6 +8,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/responsive.dart';
 import '../../core/widgets/common_widgets.dart';
+import '../../core/utils/url_launcher_helper.dart';
 import '../../data/portfolio_data.dart';
 
 class ProjectsSection extends StatefulWidget {
@@ -22,14 +23,14 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   bool _visible = false;
   String _filter = 'All';
 
-  static const _filters = ['All', 'Flutter', 'MERN', 'AI'];
+  static const _filters = ['All', 'Featured', 'Goflow', 'MovePk'];
 
   List<Map<String, dynamic>> get _filtered {
     final all = PortfolioData.projects;
     if (_filter == 'All') return all;
-    if (_filter == 'Flutter') return all.where((p) => (p['tech'] as List).any((t) => t.toString().contains('Flutter'))).toList();
-    if (_filter == 'MERN')    return all.where((p) => (p['tech'] as List).any((t) => ['React','Node.js','Express','MongoDB','MERN Stack'].contains(t))).toList();
-    if (_filter == 'AI')      return all.where((p) => (p['tech'] as List).any((t) => t.toString().contains('AI') || t.toString().contains('NLP') || t.toString().contains('Python'))).toList();
+    if (_filter == 'Featured') return all.where((p) => p['featured'] == true).toList();
+    if (_filter == 'Goflow')   return all.where((p) => (p['title'] as String).contains('Goflow')).toList();
+    if (_filter == 'MovePk')   return all.where((p) => (p['title'] as String).contains('MovePk')).toList();
     return all;
   }
 
@@ -54,7 +55,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                 child: const SectionHeader(
                   badge: '✦  Portfolio',
                   title: 'Featured Projects',
-                  subtitle: 'Real-world apps — from African logistics to AI-powered accessibility',
+                  subtitle: 'Real, delivered platforms — live on the Google Play Store',
                 ),
               ),
               SizedBox(height: isMobile ? 32 : 48),
@@ -159,7 +160,7 @@ class _DesktopGrid extends StatelessWidget {
         crossAxisCount: columns,
         mainAxisSpacing: 20,
         crossAxisSpacing: 20,
-        childAspectRatio: 0.78,
+        childAspectRatio: 0.62,
       ),
       itemCount: projects.length,
       itemBuilder: (_, i) => FadeInUp(
@@ -210,6 +211,8 @@ class _ProjectCardState extends State<_ProjectCard> {
     final techs = List<String>.from(p['tech'] as List);
     final isFeatured = p['featured'] as bool;
     final isMobile = Responsive.isMobile(context);
+    final githubUrl = p['github'] as String?;
+    final liveUrl = p['live'] as String?;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
@@ -237,6 +240,7 @@ class _ProjectCardState extends State<_ProjectCard> {
         child: Padding(
           padding: const EdgeInsets.all(22),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Top row: emoji icon + featured badge + links
@@ -264,26 +268,37 @@ class _ProjectCardState extends State<_ProjectCard> {
                           style: GoogleFonts.spaceGrotesk(fontSize: 10, fontWeight: FontWeight.w700, color: color)),
                     ),
                   const Spacer(),
-                  _IconLink(icon: Icons.code_rounded, tooltip: 'GitHub', onTap: () {}),
-                  const SizedBox(width: 8),
-                  _IconLink(icon: Icons.open_in_new_rounded, tooltip: 'Live', onTap: () {}),
+                  if (githubUrl != null) ...[
+                    _IconLink(
+                      icon: Icons.code_rounded,
+                      tooltip: 'GitHub',
+                      onTap: () => UrlLauncherHelper.openUrl(githubUrl),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
+                  if (liveUrl != null)
+                    _IconLink(
+                      icon: Icons.open_in_new_rounded,
+                      tooltip: 'View on Play Store',
+                      onTap: () => UrlLauncherHelper.openUrl(liveUrl),
+                    ),
                 ],
               ),
               const SizedBox(height: 16),
 
               // Title
               Text(p['title'] as String,
-                  style: GoogleFonts.syne(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
+                  style: GoogleFonts.syne(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.textPrimary),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis),
               const SizedBox(height: 8),
 
               // Desc
-              Expanded(
-                child: Text(
-                  p['desc'] as String,
-                  style: AppTextStyles.body(13),
-                  maxLines: isMobile ? null : 5,
-                  overflow: isMobile ? null : TextOverflow.ellipsis,
-                ),
+              Text(
+                p['desc'] as String,
+                style: AppTextStyles.body(13),
+                maxLines: isMobile ? 4 : 4,
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 14),
 
